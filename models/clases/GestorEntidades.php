@@ -1,6 +1,6 @@
 <?php
 
-class GestorProducto{
+class GestorEntidades{
     public function __construct(){
         if (!isset($_SESSION['entidades'])) {
             $_SESSION['entidades'] = [];
@@ -23,7 +23,7 @@ class GestorProducto{
                 return true;
         }
     }
-    return false
+    return false;
 }
 
     public function modificar(){
@@ -37,19 +37,4 @@ class GestorProducto{
         }
         return false;
     }        
-    }
-
-    public function reaccionar() {
-        if( $entidad == FormaDeVida() ){
-            return echo "Emite un pulso electromagnético";
-        }else{
-            if ( $entidad == MineralRaro() ){
-                return echo "Brilla con intensidad azulada";
-            }else{
-                if ( $entidad == Artefacto() ){
-                    return echo "Reproduce un mensaje en una lengua
-                                 muerta"
-                }
-            }
-        }
-    }
+}

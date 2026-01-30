@@ -20,7 +20,7 @@ class ControllerEntidades{
             $estabilidad_lvl = $_POST['estabilidad'];
 
             $entidad = new EntidadCosmica($id, $nombre, $planeta, $estabilidad_lvl);
-            $this->gestor->agregar($entidad);
+            $this->gestor->guardar($entidad);
 
             header("Location: index.php");
             exit;
@@ -37,12 +37,20 @@ class ControllerEntidades{
             exit;
         }
 
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->gestor->modificar($id, $_POST['nombre'], $_POST['planeta'], $_POST['estabilidad']);
+
             header("Location: index.php");
             exit;
-        }
+    }
+            include "views/modificacion.php";
+}
 
-        include "views/modificacion.php";
+    public function eliminar() {
+        $id = $_GET['id'] ?? null;
+        $this->gestor->eliminar($id);
+
+        header("Location: index.php");
+        exit;
     }
 }
