@@ -5,20 +5,14 @@
 </head>
 <body>
     <h1>Registro de entidades</h1>
-
-    <form method="POST">
-        Nombre:<br>
-        <input type="text" name="nombre" required><br><br>
-
-        Planeta:<br>
-        <input type="text" name="planeta" required><br><br>
-
-        Nivel de estabilidad:<br>
-        <input type="number" step="1" name="estabilidad" required><br><br>
-
-        <button type="submit">Registrar</button>
-    </form>
-
+        <table  border="1" cellpadding="10">
+            <h3>Elige la entidad que quieres registrar</h3>
+            <tr>
+                <td><a href="index.php?tipo=vida">Forma de vida</a></td>
+                <td><a href="index.php?tipo=mineral">Mineral raro</a></td>
+                <td><a href="index.php?tipo=artefacto">Artefacto</a></td>
+            </tr>
+        </table>
     <br>
     <a href="index.php">Volver</a>
 </body>
