@@ -10,7 +10,7 @@ switch ($accion) {
     case 'registro':
         $controller->registro();
         break;
-    case 'modificar':
+    case 'modificacion':
         $controller->modificacion();
         break;
     case 'expulsar':

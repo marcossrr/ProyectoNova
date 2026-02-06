@@ -4,7 +4,7 @@ class FormaDeVida extends EntidadCosmica{
     private $dieta;
 
     public function __construct($id, $nombre, $planeta, $estabilidad_lvl, $dieta){
-        parent::__construct($id, $nombre, $plateta, $estabilidad_lvl);
+        parent::__construct($id, $nombre, $planeta, $estabilidad_lvl);
         $this->dieta = $dieta;
     }
 

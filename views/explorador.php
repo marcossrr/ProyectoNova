@@ -21,7 +21,7 @@
         </tr>
 
         <?php foreach ($entidades as $e): ?>
-            <?php if (!$e) continue; // saltar si es null ?>
+            <?php if (!$e) continue;  ?>
 
             <tr>
                 <td><?= $e->getId() ?></td>
@@ -30,7 +30,7 @@
                 <td><?= $e->getEstabilidad() ?></td>
 
                 <td>
-                    <?php if ($e instanceof FormaVida) echo $e->getDieta(); ?>
+                    <?php if ($e instanceof FormaDeVida) echo $e->getDieta(); ?>
                 </td>
 
                 <td>
@@ -43,7 +43,7 @@
 
                 <td>
                     <a href="index.php?accion=modificacion&id=<?= $e->getId() ?>">Modificar</a> |
-                    <a href="index.php?accion=eliminar&id=<?= $e->getId() ?>">Expulsar</a>
+                    <a href="index.php?accion=expulsion&id=<?= $e->getId() ?>">Expulsar</a>
                 </td>
             </tr>
 

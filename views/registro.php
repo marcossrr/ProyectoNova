@@ -14,7 +14,7 @@
             <option value="mineral">Mineral raro</option>
             <option value="artefacto">Artefacto</option>
         </select>
-
+        <br><br>
         Nombre:<br>
         <input type="text" name="nombre" required><br><br>
 

@@ -27,7 +27,7 @@ class ControllerEntidades{
         switch($tipo){
 
             case "vida":
-                $entidad = new FormaVida(
+                $entidad = new FormaDeVida(
                     $id, $nombre, $planeta, $estabilidad, $_POST['dieta']
                 );
             break;
@@ -58,27 +58,59 @@ class ControllerEntidades{
 }
 
 
-    public function modificacion(){
-        $id = $_GET['id'] ?? null;
-        $entidad = $this->gestor->modificar();
+public function modificacion() {
+    $id = $_GET['id'] ?? null;
 
-        if (!$entidad) {
-            echo "Entidad desconocida";
-            exit;
+    if (!$id) {
+        echo "ID no especificado";
+        exit;
+    }
+
+    $entidad = $this->gestor->buscar($id); 
+    if (!$entidad) {
+        echo "Entidad desconocida";
+        exit;
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $nombre = $_POST['nombre'] ?? '';
+        $planeta = $_POST['planeta'] ?? '';
+        $estabilidad = $_POST['estabilidad'] ?? '';
+
+        switch($tipo){
+
+            case "vida":
+                $entidad = new FormaDeVida(
+                    $id, $nombre, $planeta, $estabilidad, $_POST['dieta']
+                );
+            break;
+
+            case "mineral":
+                $entidad = new MineralRaro(
+                    $id, $nombre, $planeta, $estabilidad, $_POST['dureza']
+                );
+            break;
+
+            case "artefacto":
+                $entidad = new Artefacto(
+                    $id, $nombre, $planeta, $estabilidad, $_POST['antiguedad']
+                );
+            break;
+
+            default:
+                die("Tipo no válido");
         }
 
-         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $this->gestor->modificar($id, $_POST['nombre'], $_POST['planeta'], $_POST['estabilidad']);
-
-            header("Location: index.php");
-            exit;
+        $this->gestor->modificar($id, $nombre, $planeta, $estabilidad, $dieta, $dureza, $antiguedad);
+        header("Location: index.php");
+        exit;
     }
-            include "views/modificacion.php";
 }
 
-    public function eliminar() {
+
+    public function expulsion() {
         $id = $_GET['id'] ?? null;
-        $this->gestor->eliminar($id);
+        $this->gestor->expulsar($id);
 
         header("Location: index.php");
         exit;
