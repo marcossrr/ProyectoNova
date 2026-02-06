@@ -3,7 +3,7 @@
 class MineralRaro extends EntidadCosmica{
        private $dureza;
 
-    public function __construct($dureza){
+    public function __construct($id, $nombre, $planeta, $estabilidad_lvl, $dureza){
         parent::__construct($id, $nombre, $planeta, $estabilidad_lvl);
         $this->dureza = $dureza;
     }

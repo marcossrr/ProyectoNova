@@ -3,7 +3,7 @@
 class Artefacto extends EntidadCosmica{
        private $antiguedad;
 
-    public function __construct($antiguedad){
+    public function __construct($id, $nombre, $planeta, $estabilidad_lvl, $antiguedad){
         parent::__construct($id, $nombre, $planeta, $estabilidad_lvl);
         $this->antiguedad = $antiguedad;
     }

@@ -12,23 +12,53 @@ class ControllerEntidades{
         include "views/explorador.php";
     }
 
-    public function Registro(){
-        if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-            $id = uniqid(); 
-            $nombre = $_POST['nombre'];
-            $planeta = $_POST['planeta'];
-            $estabilidad_lvl = $_POST['estabilidad'];
+    public function registro(){
 
-            $entidad = new EntidadCosmica($id, $nombre, $planeta, $estabilidad_lvl);
-            $this->gestor->guardar($entidad);
+    if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
-            header("Location: index.php");
-            exit;
+        $id = uniqid();
+
+        $tipo = $_POST['tipo'] ?? null;
+
+        $nombre = $_POST['nombre'];
+        $planeta = $_POST['planeta'];
+        $estabilidad = $_POST['estabilidad'];
+
+        switch($tipo){
+
+            case "vida":
+                $entidad = new FormaVida(
+                    $id, $nombre, $planeta, $estabilidad, $_POST['dieta']
+                );
+            break;
+
+            case "mineral":
+                $entidad = new MineralRaro(
+                    $id, $nombre, $planeta, $estabilidad, $_POST['dureza']
+                );
+            break;
+
+            case "artefacto":
+                $entidad = new Artefacto(
+                    $id, $nombre, $planeta, $estabilidad, $_POST['antiguedad']
+                );
+            break;
+
+            default:
+                die("Tipo no válido");
         }
-            include "views/registro.php";
+
+        $this->gestor->guardar($entidad);
+
+        header("Location: index.php");
+        exit;
     }
 
-    public function Modificacion(){
+    include "views/registro.php";
+}
+
+
+    public function modificacion(){
         $id = $_GET['id'] ?? null;
         $entidad = $this->gestor->modificar();
 

@@ -4,7 +4,7 @@
     <title>Explorador de entidades</title>
 </head>
 <body>
-    <h1>Entidades cosmicas</h1>
+    <h1>Entidades cósmicas</h1>
 
     <a href="index.php?accion=registro">Registrar entidad</a>
 
@@ -12,36 +12,43 @@
         <tr>
             <th>ID</th>
             <th>Nombre</th>
-            <th>Planeta de origen</th>
-            <th>Nivel de estabilidad</th>
-        </tr>
-        <tr>
+            <th>Planeta</th>
+            <th>Estabilidad</th>
             <th>Dieta</th>
             <th>Dureza</th>
-            <th>Antiguedad</th>
+            <th>Antigüedad</th>
+            <th>Acciones</th>
         </tr>
 
         <?php foreach ($entidades as $e): ?>
-        <tr>
-            <td><?= $e->getId() ?></td>
-            <td><?= $e->getNombre() ?></td>
-            <td><?= $e->getPlaneta() ?></td>
-            <td><?= $e->getEstabilidad() ?></td>
-        </tr>
-        <tr>
-            <td><?= $e->getDieta() ?></td>
-            <td><?= $e->getDureza() ?></td>
-            <td><?= $e->getAntiguedad() ?></td>
-        </tr>
-        <tr>
-        
-                <a href="index.php?accion=modificacion&id=<?= $p->getId() ?>">Modificar</a>
-                |
-                <a href="index.php?accion=expulsion&id=<?= $p->getId() ?>">Expulsar</a>
-            </td>
-        </tr>
-        <?php endforeach; ?>
+            <?php if (!$e) continue; // saltar si es null ?>
 
+            <tr>
+                <td><?= $e->getId() ?></td>
+                <td><?= $e->getNombre() ?></td>
+                <td><?= $e->getPlaneta() ?></td>
+                <td><?= $e->getEstabilidad() ?></td>
+
+                <td>
+                    <?php if ($e instanceof FormaVida) echo $e->getDieta(); ?>
+                </td>
+
+                <td>
+                    <?php if ($e instanceof MineralRaro) echo $e->getDureza(); ?>
+                </td>
+
+                <td>
+                    <?php if ($e instanceof Artefacto) echo $e->getAntiguedad(); ?>
+                </td>
+
+                <td>
+                    <a href="index.php?accion=modificacion&id=<?= $e->getId() ?>">Modificar</a> |
+                    <a href="index.php?accion=eliminar&id=<?= $e->getId() ?>">Expulsar</a>
+                </td>
+            </tr>
+
+        <?php endforeach; ?>
     </table>
+
 </body>
 </html>
